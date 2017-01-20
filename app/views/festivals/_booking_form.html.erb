@@ -1,0 +1,20 @@
+<div class="form-group">
+  <%= booking.label :artist %>
+  <%= booking.select :artist_id, Artist.all.map {|a| [a.name, a.id] }, class: 'form-control' %>
+</div>
+<div class="form-group">
+  <%= booking.label :stage_name %>
+  <%= booking.text_field :stage_name, class: 'form-control', placeholder: 'Enter stage name...' %>
+</div>
+<div class="form-group">
+  <%= booking.label :start %>
+  <%= booking.datetime_select :start %>
+</div>
+<div class="form-group">
+  <%= booking.label :end %>
+  <%= booking.datetime_select :end %>
+</div>
+<div class="form-group">
+  <%= booking.label :_destroy, "Remove Booking" %>
+  <%= booking.check_box :_destroy %>
+</div>

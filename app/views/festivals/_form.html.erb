@@ -1,0 +1,44 @@
+<%= form_for(festival) do |f| %>
+  <% if festival.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(festival.errors.count, "error") %> prohibited this festival from being saved:</h2>
+
+      <ul>
+      <% festival.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control', placeholder: 'Enter festival name...' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :start %>
+    <%= f.datetime_select :start %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :end %>
+    <%= f.datetime_select :end, {} %>
+  </div>
+  <% unless @festival.new_record? %>
+    <%= link_to 'New Booking', new_festival_booking_path(@festival), class: 'btn btn-primary' %>
+    <div class="row">
+      <h3>Bookings</h3>
+      <%= f.fields_for :bookings do |booking| %>
+        <div class="col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <%= render 'booking_form', booking: booking %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <button type="submit" class="btn btn-primary">Save</button> - <%= link_to 'Back', festivals_path, class: 'btn btn-default' %>
+<% end %>

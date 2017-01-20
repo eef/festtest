@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h2>Arists</h2>
+    <%= link_to 'New Artist', new_artist_path, class: 'btn btn-primary' %>
+    <ul class="list-group">
+      <% @artists.each do |artist| %>
+        <li class="list-group-item">
+          <h4><%= artist.name %></h4>
+          <p><%= artist.description %></p>
+          <p>Bookings: <%= artist.bookings.map(&:festival).map(&:name).join(', ') %> </p>
+          <%= link_to 'Edit', edit_artist_path(artist), class: 'btn btn-primary' %> - <%= link_to 'Destroy', artist, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

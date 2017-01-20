@@ -1,0 +1,30 @@
+<%= form_for [festival, booking] do |f| %>
+  <% if booking.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
+
+      <ul>
+      <% booking.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :artist %>
+    <%= f.select :artist_id, Artist.all.map {|a| [a.name, a.id] }, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :stage_name %>
+    <%= f.text_field :stage_name, class: 'form-control', placeholder: 'Enter stage name...' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :start %>
+    <%= f.datetime_select :start %>
+  </div>
+  <div class="form-group">
+    <%= f.label :end %>
+    <%= f.datetime_select :end %>
+  </div>
+  <button type="submit" class="btn btn-primary">Save</button>
+<% end %>

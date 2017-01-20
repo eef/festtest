@@ -1,0 +1,26 @@
+<div class="jumbotron">
+  <h1><%= @festival.name %></h1>
+  <p>
+    <%= @festival.start.to_s(:short) %> - <%= @festival.end.to_s(:short) %>
+  </p>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <ul class="list-group">
+      <% @festival.bookings.each do |booking| %>
+        <li class="list-group-item">
+          <strong><%= link_to booking.artist.name, festival_artist_path(@festival, booking.artist) %></strong> - Scheduled: <%= booking.start.to_s(:short) %> to <%= booking.end.to_s(:short) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="btn-group">
+      <%= link_to 'View', @festival, class: 'btn btn-default' %>
+      <%= link_to 'Edit', edit_festival_path(@festival), class: 'btn btn-default' %>
+      <%= link_to 'Destroy', @festival, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    </div>
+  </div>
+</div>
